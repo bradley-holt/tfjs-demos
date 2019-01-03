@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/bradley-holt/tfjs-demos/issues"
   },
-  "homepage": "https://github.com/bradley-holt/tfjs-demos#readme"
+  "homepage": "https://github.com/bradley-holt/tfjs-demos#readme",
+  "dependencies": {
+    "@tensorflow/tfjs": "^0.14.1"
+  }
 }
