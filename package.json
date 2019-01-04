@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/bradley-holt/tfjs-demos#readme",
   "dependencies": {
-    "@tensorflow/tfjs": "^0.14.1"
+    "@tensorflow/tfjs": "^0.14.1",
+    "table": "^5.1.1"
   }
 }
