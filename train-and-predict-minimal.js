@@ -17,9 +17,9 @@ async function run() {
   // Train the model
   await model.fit(xs, ys, {epochs: 250});
 
-  // Predict outputs for a set of inputs
-  const inputs = [3, 14, 25, 43, 56, 72];
-  const outputs = inputs.map(input =>
+  // Predict outputs for a set of test inputs
+  const testInputs = [3, 14, 25, 43, 56, 72];
+  const testOutputs = testInputs.map(input =>
     model.predict(tf.tensor2d([input], [1, 1]))
   );
 
@@ -28,23 +28,23 @@ async function run() {
   for (var i = 0; i < Math.min(xs.size, ys.size); i++) {
     trainingDataTabular.push([xs.get(i, 0), ys.get(i, 0)]);
   }
-  console.log('===========================');
+  console.log('========================================');
   console.log('Training Data');
-  console.log('===========================');
+  console.log('========================================');
   console.log(table(trainingDataTabular));
   // Display prediction results in tabular format
-  var inferencingResultsTabular = [['x', 'y inferenced', 'y calculated']];
-  for (var i = 0; i < Math.min(inputs.length, outputs.length); i++) {
-    inferencingResultsTabular.push([
-      inputs[i],
-      outputs[i].dataSync(),
-      2 * inputs[i] - 1
+  var testInferencingResultsTabular = [['x', 'y inferenced', 'y calculated']];
+  for (var i = 0; i < Math.min(testInputs.length, testOutputs.length); i++) {
+    testInferencingResultsTabular.push([
+      testInputs[i],
+      testOutputs[i].dataSync(),
+      2 * testInputs[i] - 1
     ]);
   }
-  console.log('===========================');
-  console.log('Prediction Results');
-  console.log('===========================');
-  console.log(table(inferencingResultsTabular));
+  console.log('========================================');
+  console.log('Prediction Results on Test Data');
+  console.log('========================================');
+  console.log(table(testInferencingResultsTabular));
 }
 
 run();
