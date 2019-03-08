@@ -17,6 +17,16 @@ async function run() {
   // Train the model
   await model.fit(xs, ys, {epochs: 250});
 
+  function foo(x) {
+    return x;
+  }
+
+  // Predict outputs for training inputs
+  trainingInputs = [-1, 0, 1, 2, 3, 4];
+  const trainingOutputs = trainingInputs.map(input =>
+    model.predict(tf.tensor2d([input], [1, 1]))
+  );
+
   // Predict outputs for a set of test inputs
   const testInputs = [3, 14, 25, 43, 56, 72];
   const testOutputs = testInputs.map(input =>
@@ -32,6 +42,19 @@ async function run() {
   console.log('Training Data');
   console.log('========================================');
   console.log(table(trainingDataTabular));
+  // Display training prediction results in tabular format
+  var trainingInferencingResultsTabular = [['x', 'y inferenced', 'y calculated']];
+  for (var i = 0; i < Math.min(trainingInputs.length, trainingOutputs.length); i++) {
+    trainingInferencingResultsTabular.push([
+      trainingInputs[i],
+      trainingOutputs[i].dataSync(),
+      2 * trainingInputs[i] - 1
+    ]);
+  }
+  console.log('========================================');
+  console.log('Prediction Results on Training Data');
+  console.log('========================================');
+  console.log(table(trainingInferencingResultsTabular));
   // Display prediction results in tabular format
   var testInferencingResultsTabular = [['x', 'y inferenced', 'y calculated']];
   for (var i = 0; i < Math.min(testInputs.length, testOutputs.length); i++) {
